@@ -56,6 +56,16 @@ fn part_1(input: &[(usize, usize, usize)]) -> usize {
 }
 
 
+fn part_2(input: &[(usize, usize, usize)]) -> usize {
+    let mut total_len = 0;
+    for (l, w, h) in input {
+        let p_min = (2*(l+w)).min(2*(l+h)).min(2*(w+h));
+        let bow_len = l*w*h;
+        total_len += p_min + bow_len;
+    }
+    total_len
+}
+
 #[cfg(test)]
 mod test {
     #[test]
@@ -63,5 +73,12 @@ mod test {
         let input = super::load_input().unwrap();
         let output = super::part_1(&input);
         assert_eq!(output, 1606483);
+    }
+
+    #[test]
+    fn part_2() {
+        let input = super::load_input().unwrap();
+        let output = super::part_2(&input);
+        assert_eq!(output, 3842356);
     }
 }
