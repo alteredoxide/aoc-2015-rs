@@ -77,7 +77,6 @@ fn part_1(input: &[String]) -> usize {
 // ==== Part Two
 
 fn has_any_pair_twice(s: &str) -> bool {
-    println!("SEQ: {:?}", &s[0..2]);
     if s.len() < 4 {
         return false
     }
