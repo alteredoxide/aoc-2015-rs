@@ -1,0 +1,4 @@
+turn on 0,0 through 2,2
+toggle 1,1 through 3,3
+turn off 3,3 through 3,3
+
