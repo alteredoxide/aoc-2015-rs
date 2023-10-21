@@ -13,6 +13,11 @@
 //! toggle 0,0 through 999,0 would toggle the first line of 1000 lights, turning off the ones that were on, and turning on the ones that were off.
 //! turn off 499,499 through 500,500 would turn off (or leave off) the middle four lights.
 //! After following the instructions, how many lights are lit?
+//!
+//!
+//! MY NOTE: I could have used [[bool; 1000]; 1000], but I chose to use a bitset/bitmap
+//! because while the bool array will take an entire 1Mb in memory, the bitmap will only
+//! consume 125Kb. It does, however, make the implementation of this solution much longer.
 
 use std::num::ParseIntError;
 
