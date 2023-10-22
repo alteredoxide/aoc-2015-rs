@@ -52,6 +52,13 @@
 //! MY NOTE: I could have used [[bool; 1000]; 1000], but I chose to use a bitset/bitmap
 //! because while the bool array will take an entire 1Mb in memory, the bitmap will only
 //! consume 125Kb. It does, however, make the implementation of this solution much longer.
+//!
+//! MY NOTE: For Part Two, I could have passed in &[Vec<usize>] instead of the flattened
+//! array, since I'm no longer able to take advantage of the smaller size of the bitset,
+//! but I left it flat for two simple reasons:
+//! 1. It's sligtly easier to construct the lights array
+//! 2. I could just reuse the majority of the code from `part_1()`, along with the
+//!    `flat_idx_ranges()` function.
 
 
 use std::num::ParseIntError;
