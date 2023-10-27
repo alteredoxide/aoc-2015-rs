@@ -329,6 +329,6 @@ mod tests {
         let mut lights = vec![0_usize; 1_000_000];
         let n_cols = 1000;
         let output = super::part_2(&input, &mut lights, n_cols);
-        assert_eq!(output, 26);
+        assert_eq!(output, 15343601);
     }
 }
