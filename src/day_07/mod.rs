@@ -53,6 +53,11 @@
 //! ```
 //! In little Bobby's kit's instructions booklet (provided as your puzzle input), what
 //! signal is ultimately provided to wire `a`?
+//!
+//! --- Part Two ---
+//! Now, take the signal you got on wire `a`, override wire `b` to that signal, and reset
+//! the other wires (including wire `a`). What new signal is ultimately provided to wire
+//! `a`?
 
 use std::collections::HashMap;
 
@@ -128,27 +133,6 @@ fn try_parse_instructions(input: String) -> Result<Vec<Instruction>, String> {
     Ok(instructions)
 }
 
-
-/*
-fn traverse(wire: &str, instructions: &Vec<Instruction>, parents: &mut [usize])
-    -> Result<u16, String>
-{
-    if instruct.inputs.is_empty() {
-        return Err(String::from("no inputs"))
-    }
-    // base case: signal -> wire
-    if instruct.inputs.len() == 1 {
-        let signal = match instruct.inputs[0] {
-            Input::Signal(sig) => return Ok(sig),
-            _ => return Err(String::from("expected signal"))
-        };
-    }
-    for input in instruct.inputs {
-        
-    }
-    todo!()
-}
-*/
 
 fn signal_from_processed_inputs(inputs: &[Input]) -> u16 {
     match inputs[0] {
@@ -230,6 +214,23 @@ fn part_1(input: String) -> Result<HashMap<String, u16>, String> {
 }
 
 
+fn part_2(input: String) -> Result<HashMap<String, u16>, String> {
+    let mut signals = part_1(input.clone())?;
+    let a = signals.get("a").unwrap();
+    let mut instructions: HashMap<String, Vec<Input>> = try_parse_instructions(input)?
+        .into_iter()
+        .map(|ins| (ins.wire, ins.inputs))
+        .collect();
+    *instructions.get_mut("b").unwrap() = vec![Input::Signal(*a)];
+    signals.clear();
+    for (wire, _) in &instructions {
+        let sig = doit(&wire, &instructions, &mut signals).unwrap();
+        signals.insert(wire.to_owned(), sig);
+    }
+    Ok(signals)
+}
+
+
 #[cfg(test)]
 mod tests {
     use std::{path::Path, collections::HashMap};
@@ -265,5 +266,13 @@ mod tests {
             ]
         );
         assert_eq!(output.get("d").unwrap(), expected.get("d").unwrap());
+    }
+
+    #[test]
+    fn part_2() {
+        let input = load_input("input.txt");
+        let output = super::part_2(input).unwrap();
+        let expected = 14710;
+        assert_eq!(output.get("a").unwrap(), &expected);
     }
 }
