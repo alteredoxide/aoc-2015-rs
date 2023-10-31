@@ -19,6 +19,14 @@
 //!
 //! Starting with the digits in your puzzle input, apply this process 40 times. What is
 //! the length of the result?
+//!
+//! --- Part Two ---
+//! Neat, right? You might also enjoy hearing John Conway talking about this sequence
+//! (that's Conway of Conway's Game of Life fame).
+//! 
+//! Now, starting again with the digits in your puzzle input, apply this process 50 times.
+//! What is the length of the new result?
+
 
 fn next_sequence(input: &str) -> String {
     let mut output = String::from("");
@@ -65,6 +73,13 @@ mod tests {
         let input = "1113222113";
         let output = super::part_1(input, 40);
         assert_eq!(output, 252594);
+    }
+
+    #[test]
+    fn part_2() {
+        let input = "1113222113";
+        let output = super::part_1(input, 50);
+        assert_eq!(output, 3579328);
     }
 
 }
