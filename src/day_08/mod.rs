@@ -171,6 +171,6 @@ mod tests {
     fn part_2() {
         let input = load_input("input.txt").unwrap();
         let output = super::part_2(&input);
-
+        assert_eq!(output, 2046);
     }
 }
