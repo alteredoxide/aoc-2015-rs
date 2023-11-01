@@ -140,6 +140,7 @@ fn increment_str_inplace(s: &mut str) {
 
 
 fn increment_pwd(pwd: &mut str) -> Result<String, String> {
+    increment_str_inplace(pwd);
     if let Some(i) = pwd.find(&['i', 'o', 'l']) {
         // increment char at idx
         increment_char_idx_inplace(pwd, i)?;
