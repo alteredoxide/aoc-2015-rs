@@ -161,6 +161,13 @@ fn part_1(input: &mut str) -> String {
 }
 
 
+fn part_2(input: &mut str) -> String {
+    increment_pwd(input).unwrap();
+    increment_pwd(input).unwrap();
+    input.to_owned()
+}
+
+
 #[cfg(test)]
 mod tests {
 
@@ -171,4 +178,13 @@ mod tests {
         let output = super::part_1(&mut input);
         assert_eq!(output, "cqjxxyzz");
     }
+
+    #[test]
+    fn part_2() {
+        let mut input = String::from("cqjxjnds");
+        //let mut input = String::from("aqixjndz");
+        let output = super::part_2(&mut input);
+        assert_eq!(output, "cqkaabcc");
+    }
+
 }
